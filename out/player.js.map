@@ -1,1 +1,1 @@
-{"version":3,"file":"player.js","sourceRoot":"/Users/ericli/Dropbox/Wall-E and Tomato/A2017/lh-games-tomato/app/","sources":["player.ts"],"names":[],"mappings":";;AAEA;IAaI,YAAY,GAAa,EAAE,QAAkB;IAE7C,CAAC;CACJ;AAhBD,wBAgBC"}
+{"version":3,"file":"player.js","sourceRoot":"/Users/ericli/Dropbox/Wall-E and Tomato/A2017/lh-games-tomato/app/","sources":["player.ts"],"names":[],"mappings":";;AAEA;IAaI,YAAY,GAAa,EAAE,QAAkB;QACzC,IAAI,CAAC,IAAI,GAAG,QAAQ,CAAC,MAAM,CAAC,IAAI,CAAC;QACjC,IAAI,CAAC,WAAW,GAAG,QAAQ,CAAC,MAAM,CAAC,WAAW,CAAC;IACnD,CAAC;CACJ;AAjBD,wBAiBC"}

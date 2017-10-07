@@ -14,6 +14,7 @@ export class Player implements IPlayer {
     HouseLocation: Point;
 
     constructor(map: Tile[][], gameInfo: GameInfo) {
-        
+        this.Name = gameInfo.Player.Name;
+        this.AttackPower = gameInfo.Player.AttackPower;
     }
 }

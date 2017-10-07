@@ -1,7 +1,21 @@
-FROM polyhx/python-seed
+############################################
+#          DO NOT TOUCH THIS FILE          #
+############################################
 
-ADD . .
+FROM node:8.1.0-alpine
 
-EXPOSE 3000
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-CMD ["python", "ai.py"]
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm install
+RUN cp -a /tmp/node_modules /usr/src/app
+
+# Bundle app source
+ADD . /usr/src/app
+
+RUN npm run tsc
+
+EXPOSE 8080
+CMD [ "npm", "start" ]

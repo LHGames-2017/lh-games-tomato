@@ -10,22 +10,33 @@ export class Navigation {
         return newPosition; // stub
     }
 
-    public static getRouteToPoint(map: Tile[][], gameInfo: GameInfo, target: Point) {
+    public static async getRouteToPoint(map: Tile[][], gameInfo: GameInfo, target: Point): Promise<Point> {
+        let nextPoint = new Point(gameInfo.Player.Position.X, gameInfo.Player.Position.Y);
         const astar = new easystarjs.js();
+        astar.enableDiagonals();
         const pathMap = map.map((line) => {
             return line.map((tile) => {
                 return tile.Content === TileContent.Empty ? 1 : 0;
             });
         });
-        //console.log(pathMap);
+        //astar.setIterationsPerCalculation(1000);
 
         astar.setGrid(pathMap);
+        console.log(pathMap);
         astar.disableCornerCutting();
         astar.setAcceptableTiles([1]);
-        astar.findPath(gameInfo.Player.Position.X, gameInfo.Player.Position.Y, target.X, target.Y, (path) => {
-            console.log(path);
+        await astar.findPath(gameInfo.Player.Position.X - 20, gameInfo.Player.Position.Y - 20, target.X - 20, target.Y - 20, (path) => {
+            if (path === null) {
+                console.log('Path was not found.');
+            } else {
+                console.log(path);
+                console.log('Path was found. The first Point is ' + (path[1].x + 20) + ' ' + (path[1].y + 20));
+                nextPoint = new Point(path[1].x + 20, path[1].y + 20);
+            }
         });
         astar.calculate();
+
+        return await nextPoint;
     }
 
     public static getTarget(map: Tile[][], gameInfo: GameInfo): Point {

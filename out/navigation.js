@@ -1,4 +1,12 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const interfaces_1 = require("./interfaces");
 const easystarjs = require("easystarjs");
@@ -10,20 +18,33 @@ class Navigation {
         return newPosition; // stub
     }
     static getRouteToPoint(map, gameInfo, target) {
-        const astar = new easystarjs.js();
-        const pathMap = map.map((line) => {
-            return line.map((tile) => {
-                return tile.Content === interfaces_1.TileContent.Empty ? 1 : 0;
+        return __awaiter(this, void 0, void 0, function* () {
+            let nextPoint = new interfaces_1.Point(gameInfo.Player.Position.X, gameInfo.Player.Position.Y);
+            const astar = new easystarjs.js();
+            astar.enableDiagonals();
+            const pathMap = map.map((line) => {
+                return line.map((tile) => {
+                    return tile.Content === interfaces_1.TileContent.Empty ? 1 : 0;
+                });
             });
+            //astar.setIterationsPerCalculation(1000);
+            astar.setGrid(pathMap);
+            console.log(pathMap);
+            astar.disableCornerCutting();
+            astar.setAcceptableTiles([1]);
+            yield astar.findPath(gameInfo.Player.Position.X - 20, gameInfo.Player.Position.Y - 20, target.X - 20, target.Y - 20, (path) => {
+                if (path === null) {
+                    console.log('Path was not found.');
+                }
+                else {
+                    console.log(path);
+                    console.log('Path was found. The first Point is ' + (path[1].x + 20) + ' ' + (path[1].y + 20));
+                    nextPoint = new interfaces_1.Point(path[1].x + 20, path[1].y + 20);
+                }
+            });
+            astar.calculate();
+            return yield nextPoint;
         });
-        //console.log(pathMap);
-        astar.setGrid(pathMap);
-        astar.disableCornerCutting();
-        astar.setAcceptableTiles([1]);
-        astar.findPath(gameInfo.Player.Position.X, gameInfo.Player.Position.Y, target.X, target.Y, (path) => {
-            console.log(path);
-        });
-        astar.calculate();
     }
     static getTarget(map, gameInfo) {
         return new interfaces_1.Point(25, 27); // stub

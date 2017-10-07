@@ -26,19 +26,25 @@ module Route {
             return map;
         }
 
-        private static getAction(map: Tile[][], gameInfo: GameInfo) {
-            //const nextPoint = Navigation.getClosestRessource(map, gameInfo);
-            //Navigation.getRouteToPoint(map, gameInfo, nextPoint);
-            return AIHelper.createMoveAction(new Point(15, 27));
+        private static async getAction(map: Tile[][], gameInfo: GameInfo): Promise<string> {
+            let action = '';
+            //const targetPoint = Navigation.getClosestRessource(map, gameInfo);
+            const targetPoint = new Point(26, 27);
+            await Navigation.getRouteToPoint(map, gameInfo, targetPoint).then((value) => {
+                console.log('next point ' + value.X + ' ' + value.Y);
+                action = AIHelper.createMoveAction(value);
+            });
+            return await action;
         }
 
         public index(req: express.Request, res: express.Response, next: express.NextFunction) {
             const mapData = JSON.parse(req.body.map) as GameInfo;
             console.log(req.body.map);
             const map = Index.decompressMap(mapData.CustomSerializedMap);
-            let action = Index.getAction(map, mapData);
-            console.log(action);
-            res.send(action);
+            Index.getAction(map, mapData).then((action) => {
+                console.log(action);
+                res.send(action);
+            });
         }
 
         public ping(req: express.Request, res: express.Response, next: express.NextFunction) {

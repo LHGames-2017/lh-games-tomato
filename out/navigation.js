@@ -33,6 +33,9 @@ class Navigation {
         }
         return minDistPoint;
     }
+    static getClosestPlayer(map, gameInfo) {
+        return new interfaces_1.Point(25, 27);
+    }
 }
 exports.Navigation = Navigation;
 //# sourceMappingURL=navigation.js.map

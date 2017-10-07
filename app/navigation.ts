@@ -35,4 +35,8 @@ export class Navigation {
 
         return minDistPoint;
     }
+
+    public static getClosestPlayer(map: Tile[][], gameInfo: GameInfo): Point {
+        return new Point(25, 27);
+    }
 }

@@ -24,6 +24,7 @@ var Route;
         index(req, res, next) {
             const mapData = JSON.parse(req.body.map);
             const map = Index.decompressMap(mapData.CustomSerializedMap);
+            console.log(map);
             let action = Index.getAction(map, mapData);
             res.send(action);
         }

@@ -30,7 +30,6 @@ module Route {
         }
 
         public index(req: express.Request, res: express.Response, next: express.NextFunction) {
-            console.log(req.body.map);
             const mapData = JSON.parse(req.body.map) as GameInfo;
             const map = Index.decompressMap(mapData.CustomSerializedMap);
 

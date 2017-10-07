@@ -22,7 +22,6 @@ var Route;
         static getAction(map, gameInfo) {
         }
         index(req, res, next) {
-            console.log(req.body.map);
             const mapData = JSON.parse(req.body.map);
             const map = Index.decompressMap(mapData.CustomSerializedMap);
             let action = Index.getAction(map, mapData);

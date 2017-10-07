@@ -15,25 +15,25 @@ class AIHelper {
         return AIHelper.createAction('MoveAction', newPosition);
     }
     static createHealAction() {
-        return JSON.stringify({ ActionName: 'HealAction', Content: '' });
+        return JSON.stringify({ ActionName: "HealAction", Content: "" });
     }
     static createPurchaseAction(item) {
         let action;
         switch (item) {
             case interfaces_1.PurchasableItem.DevolutionsBackpack:
-                action = { ActionName: 'PurchaseAction', Content: 'DevolutionsBackpack' };
+                action = { ActionName: "PurchaseAction", Content: "DevolutionsBackpack" };
                 break;
             case interfaces_1.PurchasableItem.DevolutionsPickaxe:
-                action = { ActionName: 'PurchaseAction', Content: 'DevolutionsBackpack' };
+                action = { ActionName: "PurchaseAction", Content: "DevolutionsBackpack" };
                 break;
             case interfaces_1.PurchasableItem.HealthPotion:
-                action = { ActionName: 'PurchaseAction', Content: 'DevolutionsBackpack' };
+                action = { ActionName: "PurchaseAction", Content: "DevolutionsBackpack" };
                 break;
             case interfaces_1.PurchasableItem.MicrosoftSword:
-                action = { ActionName: 'PurchaseAction', Content: 'DevolutionsBackpack' };
+                action = { ActionName: "PurchaseAction", Content: "DevolutionsBackpack" };
                 break;
             case interfaces_1.PurchasableItem.UbisoftShield:
-                action = { ActionName: 'PurchaseAction', Content: 'DevolutionsBackpack' };
+                action = { ActionName: "PurchaseAction", Content: "DevolutionsBackpack" };
                 break;
         }
         return JSON.stringify(action);
@@ -42,19 +42,19 @@ class AIHelper {
         let action;
         switch (upgrade) {
             case interfaces_1.UpgradeType.CollectingSpeed:
-                action = JSON.stringify({ ActionName: 'UpgradeAction', Content: 'CollectingSpeed' });
+                action = JSON.stringify({ ActionName: "UpgradeAction", Content: "CollectingSpeed" });
                 break;
             case interfaces_1.UpgradeType.CarryingCapacity:
-                action = JSON.stringify({ ActionName: 'UpgradeAction', Content: 'CarryingCapacity' });
+                action = JSON.stringify({ ActionName: "UpgradeAction", Content: "CarryingCapacity" });
                 break;
             case interfaces_1.UpgradeType.AttackPower:
-                action = JSON.stringify({ ActionName: 'UpgradeAction', Content: 'AttackPower' });
+                action = JSON.stringify({ ActionName: "UpgradeAction", Content: "AttackPower" });
                 break;
             case interfaces_1.UpgradeType.Defence:
-                action = JSON.stringify({ ActionName: 'UpgradeAction', Content: 'Defence' });
+                action = JSON.stringify({ ActionName: "UpgradeAction", Content: "Defence" });
                 break;
             case interfaces_1.UpgradeType.MaximumHealth:
-                action = JSON.stringify({ ActionName: 'UpgradeAction', Content: 'MaximumHealth' });
+                action = JSON.stringify({ ActionName: "UpgradeAction", Content: "MaximumHealth" });
                 break;
         }
         console.log(action);

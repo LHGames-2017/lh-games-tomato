@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { GameInfo, Tile, Point } from '../interfaces';
 import { AIHelper } from '../aiHelper';
+import { Navigation } from '../navigation';
 
 module Route {
 
@@ -26,7 +27,9 @@ module Route {
         }
 
         private static getAction(map: Tile[][], gameInfo: GameInfo) {
-            return AIHelper.createMoveAction(new Point(26, 27));
+            const target = Navigation.getTarget(map, gameInfo);
+            const nextPoint = Navigation.getRoute(map, gameInfo, target);
+            return AIHelper.createMoveAction(nextPoint);
         }
 
         public index(req: express.Request, res: express.Response, next: express.NextFunction) {

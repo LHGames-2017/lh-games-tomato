@@ -27,8 +27,7 @@ module Route {
         }
 
         private static getAction(map: Tile[][], gameInfo: GameInfo) {
-            const target = Navigation.getTarget(map, gameInfo);
-            const nextPoint = Navigation.getRoute(map, gameInfo, target);
+            const nextPoint = Navigation.getRoute(map, gameInfo);
             return AIHelper.createMoveAction(nextPoint);
         }
 
@@ -37,6 +36,7 @@ module Route {
             console.log(req.body.map);
             const map = Index.decompressMap(mapData.CustomSerializedMap);
             let action = Index.getAction(map, mapData);
+            console.log(action);
             res.send(action);
         }
 

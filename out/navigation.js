@@ -2,9 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const interfaces_1 = require("./interfaces");
 class Navigation {
-    static getRoute(map, gameInfo, target) {
+    static getRoute(map, gameInfo) {
         // find the next point to get to the target
-        return new interfaces_1.Point(25, 27); // stub
+        let currentPosition = gameInfo.Player.Position;
+        let newPosition = new interfaces_1.Point(currentPosition.X - 1, currentPosition.Y);
+        return newPosition; // stub
+    }
+    static getRouteToPoint(map, gameInfo, target) {
+        const currentPosition = gameInfo.Player.Position;
+        const up = new interfaces_1.Point(currentPosition.X, currentPosition.Y + 1);
+        const down = new interfaces_1.Point(currentPosition.X, currentPosition.Y - 1);
+        const left = new interfaces_1.Point(currentPosition.X - 1, currentPosition.Y);
+        const right = new interfaces_1.Point(currentPosition.X + 1, currentPosition.Y);
+        const upDist = currentPosition.Distance(up);
+        const downDist = currentPosition.Distance(down);
+        const leftDist = currentPosition.Distance(left);
+        const rightDist = currentPosition.Distance(right);
+        return pointsToNavigate;
     }
     static getTarget(map, gameInfo) {
         return new interfaces_1.Point(25, 27); // stub
@@ -34,7 +48,7 @@ class Navigation {
         return minDistPoint;
     }
     static getClosestPlayer(map, gameInfo) {
-        let closestPlayer;
+        let closestPlayer = null;
         let minDistance = 0;
         const currentPosition = gameInfo.Player.Position;
         if (gameInfo.OtherPlayers !== []) {

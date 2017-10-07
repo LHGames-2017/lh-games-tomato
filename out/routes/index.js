@@ -22,8 +22,7 @@ var Route;
             return map;
         }
         static getAction(map, gameInfo) {
-            const target = navigation_1.Navigation.getTarget(map, gameInfo);
-            const nextPoint = navigation_1.Navigation.getRoute(map, gameInfo, target);
+            const nextPoint = navigation_1.Navigation.getRoute(map, gameInfo);
             return aiHelper_1.AIHelper.createMoveAction(nextPoint);
         }
         index(req, res, next) {
@@ -31,6 +30,7 @@ var Route;
             console.log(req.body.map);
             const map = Index.decompressMap(mapData.CustomSerializedMap);
             let action = Index.getAction(map, mapData);
+            console.log(action);
             res.send(action);
         }
         ping(req, res, next) {

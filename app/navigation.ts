@@ -1,9 +1,28 @@
 import { GameInfo, Tile, Point, TileContent, IPlayer } from './interfaces';
+import { AIHelper } from './aiHelper';
 
 export class Navigation {
-    public static getRoute(map: Tile[][], gameInfo: GameInfo, target: Point): Point {
+    public static getRoute(map: Tile[][], gameInfo: GameInfo): Point {
         // find the next point to get to the target
-        return new Point(25, 27); // stub
+        let currentPosition = gameInfo.Player.Position;
+        let newPosition = new Point(currentPosition.X - 1, currentPosition.Y);
+        return newPosition; // stub
+    }
+
+    public static getRouteToPoint(map: Tile[][], gameInfo: GameInfo, target: Point): Array<Point> {
+        const currentPosition = gameInfo.Player.Position;
+        
+        const up = new Point(currentPosition.X, currentPosition.Y + 1);
+        const down = new Point(currentPosition.X, currentPosition.Y -1);
+        const left = new Point(currentPosition.X - 1, currentPosition.Y);
+        const right = new Point(currentPosition.X + 1, currentPosition.Y);
+
+        const upDist = currentPosition.Distance(up);
+        const downDist = currentPosition.Distance(down);
+        const leftDist = currentPosition.Distance(left);
+        const rightDist = currentPosition.Distance(right);
+
+        return pointsToNavigate;
     }
 
     public static getTarget(map: Tile[][], gameInfo: GameInfo): Point {
@@ -37,7 +56,7 @@ export class Navigation {
     }
 
     public static getClosestPlayer(map: Tile[][], gameInfo: GameInfo): IPlayer {
-        let closestPlayer: IPlayer;
+        let closestPlayer: IPlayer = null;
         let minDistance = 0;
         const currentPosition: Point = gameInfo.Player.Position;
 
@@ -56,4 +75,5 @@ export class Navigation {
         }
         return closestPlayer;
     }
+
 }

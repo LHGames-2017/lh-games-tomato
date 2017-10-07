@@ -20,14 +20,6 @@ var Route;
             }
             return map;
         }
-        static getRoute(map, gameInfo, target) {
-            // find the next point to get to the target
-            return new interfaces_1.Point(25, 27); // stub
-        }
-        static getTarget(map, gameInfo) {
-            // find the closest ressource
-            return new interfaces_1.Point(25, 27); // stub
-        }
         static getAction(map, gameInfo) {
             return aiHelper_1.AIHelper.createMoveAction(new interfaces_1.Point(26, 27));
         }

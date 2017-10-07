@@ -7,8 +7,11 @@ class Navigation {
         return new interfaces_1.Point(25, 27); // stub
     }
     static getTarget(map, gameInfo) {
-        // find the closest ressource
         return new interfaces_1.Point(25, 27); // stub
+    }
+    static getClosestRessource(map, gameInfo) {
+        // find the closest ressource
+        return new interfaces_1.Point(25, 27);
     }
 }
 exports.Navigation = Navigation;

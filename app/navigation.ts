@@ -7,7 +7,11 @@ export class Navigation {
     }
 
     public static getTarget(map: Tile[][], gameInfo: GameInfo): Point {
-        // find the closest ressource
         return new Point(25, 27); // stub
+    }
+
+    public static getClosestRessource(map: Tile[][], gameInfo: GameInfo): Point {
+        // find the closest ressource
+        return new Point(25, 27);
     }
 }

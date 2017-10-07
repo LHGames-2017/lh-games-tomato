@@ -34,7 +34,24 @@ class Navigation {
         return minDistPoint;
     }
     static getClosestPlayer(map, gameInfo) {
-        return new interfaces_1.Point(25, 27);
+        let closestPlayer;
+        let minDistance = 0;
+        const currentPosition = gameInfo.Player.Position;
+        if (gameInfo.OtherPlayers !== []) {
+            for (let i = 0; i < gameInfo.OtherPlayers.length; i++) {
+                if (minDistance === 0) {
+                    minDistance = currentPosition.Distance(gameInfo.OtherPlayers[i].Position);
+                    closestPlayer = gameInfo.OtherPlayers[i];
+                }
+                else {
+                    if (currentPosition.Distance(gameInfo.OtherPlayers[i].Position) < minDistance) {
+                        minDistance = currentPosition.Distance(gameInfo.OtherPlayers[i].Position);
+                        closestPlayer = gameInfo.OtherPlayers[i];
+                    }
+                }
+            }
+        }
+        return closestPlayer;
     }
 }
 exports.Navigation = Navigation;

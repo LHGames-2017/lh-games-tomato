@@ -25,6 +25,16 @@ module Route {
             return map;
         }
 
+        public static getRoute(map: Tile[][], gameInfo: GameInfo, target: Point): Point {
+            // find the next point to get to the target
+            return new Point(25, 27); // stub
+        }
+
+        public static getTarget(map: Tile[][], gameInfo: GameInfo): Point {
+            // find the closest ressource
+            return new Point(25, 27); // stub
+        }
+
         private static getAction(map: Tile[][], gameInfo: GameInfo) {
             return AIHelper.createMoveAction(new Point(26, 27));
         }

@@ -1,5 +1,6 @@
 import { GameInfo, Tile, Point, TileContent, IPlayer } from './interfaces';
 import { AIHelper } from './aiHelper';
+import * as easystarjs from 'easystarjs';
 
 export class Navigation {
     public static getRoute(map: Tile[][], gameInfo: GameInfo): Point {
@@ -9,20 +10,22 @@ export class Navigation {
         return newPosition; // stub
     }
 
-    public static getRouteToPoint(map: Tile[][], gameInfo: GameInfo, target: Point): Array<Point> {
-        const currentPosition = gameInfo.Player.Position;
+    public static getRouteToPoint(map: Tile[][], gameInfo: GameInfo, target: Point) {
+        const astar = new easystarjs.js();
+        const pathMap = map.map((line) => {
+            return line.map((tile) => {
+                return tile.Content === TileContent.Empty ? 1 : 0;
+            });
+        });
+        //console.log(pathMap);
 
-        const up = new Point(currentPosition.X, currentPosition.Y + 1);
-        const down = new Point(currentPosition.X, currentPosition.Y - 1);
-        const left = new Point(currentPosition.X - 1, currentPosition.Y);
-        const right = new Point(currentPosition.X + 1, currentPosition.Y);
-
-        const upDist = currentPosition.Distance(up);
-        const downDist = currentPosition.Distance(down);
-        const leftDist = currentPosition.Distance(left);
-        const rightDist = currentPosition.Distance(right);
-
-        return pointsToNavigate;
+        astar.setGrid(pathMap);
+        astar.disableCornerCutting();
+        astar.setAcceptableTiles([1]);
+        astar.findPath(gameInfo.Player.Position.X, gameInfo.Player.Position.Y, target.X, target.Y, (path) => {
+            console.log(path);
+        });
+        astar.calculate();
     }
 
     public static getTarget(map: Tile[][], gameInfo: GameInfo): Point {

@@ -1,7 +1,6 @@
 "use strict";
 const interfaces_1 = require("../interfaces");
 const aiHelper_1 = require("../aiHelper");
-const navigation_1 = require("../navigation");
 var Route;
 (function (Route) {
     class Index {
@@ -22,8 +21,9 @@ var Route;
             return map;
         }
         static getAction(map, gameInfo) {
-            const nextPoint = navigation_1.Navigation.getRoute(map, gameInfo);
-            return aiHelper_1.AIHelper.createMoveAction(nextPoint);
+            //const nextPoint = Navigation.getClosestRessource(map, gameInfo);
+            //Navigation.getRouteToPoint(map, gameInfo, nextPoint);
+            return aiHelper_1.AIHelper.createMoveAction(new interfaces_1.Point(15, 27));
         }
         index(req, res, next) {
             const mapData = JSON.parse(req.body.map);

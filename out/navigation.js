@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const interfaces_1 = require("./interfaces");
+const easystarjs = require("easystarjs");
 class Navigation {
     static getRoute(map, gameInfo) {
         // find the next point to get to the target
@@ -9,16 +10,20 @@ class Navigation {
         return newPosition; // stub
     }
     static getRouteToPoint(map, gameInfo, target) {
-        const currentPosition = gameInfo.Player.Position;
-        const up = new interfaces_1.Point(currentPosition.X, currentPosition.Y + 1);
-        const down = new interfaces_1.Point(currentPosition.X, currentPosition.Y - 1);
-        const left = new interfaces_1.Point(currentPosition.X - 1, currentPosition.Y);
-        const right = new interfaces_1.Point(currentPosition.X + 1, currentPosition.Y);
-        const upDist = currentPosition.Distance(up);
-        const downDist = currentPosition.Distance(down);
-        const leftDist = currentPosition.Distance(left);
-        const rightDist = currentPosition.Distance(right);
-        return pointsToNavigate;
+        const astar = new easystarjs.js();
+        const pathMap = map.map((line) => {
+            return line.map((tile) => {
+                return tile.Content === interfaces_1.TileContent.Empty ? 1 : 0;
+            });
+        });
+        //console.log(pathMap);
+        astar.setGrid(pathMap);
+        astar.disableCornerCutting();
+        astar.setAcceptableTiles([1]);
+        astar.findPath(gameInfo.Player.Position.X, gameInfo.Player.Position.Y, target.X, target.Y, (path) => {
+            console.log(path);
+        });
+        astar.calculate();
     }
     static getTarget(map, gameInfo) {
         return new interfaces_1.Point(25, 27); // stub

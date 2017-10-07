@@ -27,8 +27,9 @@ module Route {
         }
 
         private static getAction(map: Tile[][], gameInfo: GameInfo) {
-            const nextPoint = Navigation.getRoute(map, gameInfo);
-            return AIHelper.createMoveAction(nextPoint);
+            //const nextPoint = Navigation.getClosestRessource(map, gameInfo);
+            //Navigation.getRouteToPoint(map, gameInfo, nextPoint);
+            return AIHelper.createMoveAction(new Point(15, 27));
         }
 
         public index(req: express.Request, res: express.Response, next: express.NextFunction) {

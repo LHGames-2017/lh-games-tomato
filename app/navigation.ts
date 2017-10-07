@@ -11,9 +11,9 @@ export class Navigation {
 
     public static getRouteToPoint(map: Tile[][], gameInfo: GameInfo, target: Point): Array<Point> {
         const currentPosition = gameInfo.Player.Position;
-        
+
         const up = new Point(currentPosition.X, currentPosition.Y + 1);
-        const down = new Point(currentPosition.X, currentPosition.Y -1);
+        const down = new Point(currentPosition.X, currentPosition.Y - 1);
         const left = new Point(currentPosition.X - 1, currentPosition.Y);
         const right = new Point(currentPosition.X + 1, currentPosition.Y);
 

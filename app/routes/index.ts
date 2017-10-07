@@ -26,14 +26,13 @@ module Route {
         }
 
         private static getAction(map: Tile[][], gameInfo: GameInfo) {
-
+            return AIHelper.createMoveAction(new Point(26, 27));
         }
 
         public index(req: express.Request, res: express.Response, next: express.NextFunction) {
             const mapData = JSON.parse(req.body.map) as GameInfo;
+            console.log(mapData);
             const map = Index.decompressMap(mapData.CustomSerializedMap);
-            console.log(map);
-
             let action = Index.getAction(map, mapData);
             res.send(action);
         }

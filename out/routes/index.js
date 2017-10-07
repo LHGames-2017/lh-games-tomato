@@ -1,5 +1,6 @@
 "use strict";
 const interfaces_1 = require("../interfaces");
+const aiHelper_1 = require("../aiHelper");
 var Route;
 (function (Route) {
     class Index {
@@ -20,11 +21,12 @@ var Route;
             return map;
         }
         static getAction(map, gameInfo) {
+            return aiHelper_1.AIHelper.createMoveAction(new interfaces_1.Point(26, 27));
         }
         index(req, res, next) {
             const mapData = JSON.parse(req.body.map);
+            console.log(mapData);
             const map = Index.decompressMap(mapData.CustomSerializedMap);
-            console.log(map);
             let action = Index.getAction(map, mapData);
             res.send(action);
         }
